@@ -66,7 +66,74 @@
             <h3>调拨追踪</h3>
             <div style="margin: 10px 20px 0 30px"></div>
           </div>
-          <div id="main" class="echarts"></div>
+          <div class="left-top_container">
+            <div
+              :class="{ 'tab-item': true, active: singleInd1 == 0 }"
+              @click="handleSingle1(0)"
+            >
+              接收调拨
+            </div>
+            <div
+              :class="{ 'tab-item': true, active: singleInd1 == 1 }"
+              @click="handleSingle1(1)"
+            >
+              发出调拨
+            </div>
+          </div>
+
+          <el-table
+            :data="tableData"
+            style="width: 96%; margin: 20px auto 0 auto"
+            max-height="260px"
+            border
+          >
+            <el-table-column
+              prop="name"
+              label="单位"
+              align="center"
+              show-overflow-tooltip
+            >
+            </el-table-column>
+            <el-table-column
+              prop="num"
+              label="物资件数"
+              align="center"
+              width="80"
+              show-overflow-tooltip
+            >
+            </el-table-column>
+            <el-table-column
+              prop="contact"
+              label="接收时间"
+              align="center"
+              show-overflow-tooltip
+            >
+            </el-table-column>
+          </el-table>
+        </dv-border-box-10>
+      </div>
+    </div>
+
+    <!-- 右侧 -->
+    <div
+      :class="{
+        'right-container': true,
+        'container-hide': !centerShow,
+        'container-show': centerShow,
+      }"
+    >
+      <div class="right-top">
+        <dv-border-box-10>
+          <div class="title">
+            <h3>全省应急物资储备年度支出</h3>
+            <div style="margin: 10px 20px 0 30px">
+              
+            </div>
+          </div>
+          <!-- 内容 -->
+          <div class="content-container">
+
+          </div>
         </dv-border-box-10>
       </div>
     </div>
@@ -80,6 +147,7 @@ export default {
     return {
       centerShow: true,
       singleInd: 0,
+      singleInd1: 0,
       tableData: [
         {
           name: "杭州市富阳区民政救助站",
@@ -108,6 +176,9 @@ export default {
     handleSingle(index) {
       this.singleInd = index;
     },
+    handleSingle1(index) {
+      this.singleInd1 = index;
+    },
   },
 };
 </script>
@@ -131,6 +202,15 @@ export default {
   }
 }
 
+.content-container {
+  height: 90%;
+  color: #bde0ff;
+  margin: 0;
+  margin-top: 14px;
+  padding: 3px 20px;
+  // border-radius: 50px;
+  background: rgba(9, 47, 93, 0.8);
+}
 .left-top_container {
   margin: 20px 30px 10px 30px;
   display: flex;
@@ -209,16 +289,34 @@ export default {
   width: 35%;
 }
 
+// 右侧
+.right-container {
+  position: absolute;
+  right: 10px;
+  top: 120px;
+  height: 72%;
+  z-index: 99;
+  .right-top {
+    height: 100%;
+    width: 100%;
+  }
+  .right-bottom {
+    margin-top: 20px;
+    height: 55%;
+    width: 100%;
+  }
+}
 /deep/.el-table th {
   background: rgba(9, 47, 93, 0.8);
   color: #fff;
 }
 /deep/.el-table tr {
+  cursor: pointer;
   background: rgba(9, 47, 93, 0.8);
   color: #fff;
 }
-/deep/.el-table tr td:hover {
-  background: rgba(9, 47, 93, 0.8);
-  color: #fff;
+
+/deep/.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: rgba(9, 47, 93, 0.8) !important;
 }
 </style>

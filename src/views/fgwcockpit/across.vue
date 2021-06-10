@@ -157,19 +157,19 @@
             </div>
             <div class="city-num">
               <div style="flex: 1; text-align: center">
-                <dv-digital-flop :config="config1" style="height: 52px" />
+                <dv-digital-flop :config="config7" style="height: 52px" />
                 <div style="margin-top: -14px">第一季度</div>
               </div>
               <div style="flex: 1; text-align: center">
-                <dv-digital-flop :config="config2" style="height: 52px" />
+                <dv-digital-flop :config="config8" style="height: 52px" />
                 <div style="margin-top: -14px">第二季度</div>
               </div>
               <div style="flex: 1; text-align: center">
-                <dv-digital-flop :config="config3" style="height: 52px" />
+                <dv-digital-flop :config="config9" style="height: 52px" />
                 <div style="margin-top: -14px">第三季度</div>
               </div>
               <div style="flex: 1; text-align: center">
-                <dv-digital-flop :config="config4" style="height: 52px" />
+                <dv-digital-flop :config="config10" style="height: 52px" />
                 <div style="margin-top: -14px">第四季度</div>
               </div>
             </div>
@@ -305,38 +305,51 @@ export default {
       loading: true,
       numShow: true,
       configData: {
+        header: ['物资所属单位', '类型', '时间'],
         data: [
-          ["行1列1", "行1列2", "行1列3"],
-          ["行2列1", "行2列2", "行2列3"],
-          ["行3列1", "行3列2", "行3列3"],
-          ["行4列1", "行4列2", "行4列3"],
-          ["行5列1", "行5列2", "行5列3"],
-          ["行6列1", "行6列2", "行6列3"],
-          ["行7列1", "行7列2", "行7列3"],
-          ["行8列1", "行8列2", "行8列3"],
-          ["行9列1", "行9列2", "行9列3"],
-          ["行10列1", "行10列2", "行10列3"],
+          ["省商业厅", "入库", "18:27:17"],
+          ["省国资委", "出库", "18:22:05"],
+          ["舟山消防救援", "报废", "18:16:53"],
+          ["台州商务局", "入库", "18:11:41"],
+          ["金华应急局", "入库", "18:06:29"],
+          ["省粮食厅", "报废", "18:01:17"],
+          ["杭州市应急局", "入库", "17:56:05"],
+          ["宁波市粮食局  ", "入库", "17:50:53"],
+          ["嘉兴市应急局", "报废", "17:45:41"],
+          ["台州市应急局", "入库", "17:40:29"],
         ],
       },
       config: this.initNum(0, "个", {
         fontSize: 40,
       }),
-      config1: this.initNum(0, "万", {
+      config1: this.initNum(0, "", {
         fontSize: 20,
       }),
-      config2: this.initNum(0, "万", {
+      config2: this.initNum(0, "", {
         fontSize: 20,
       }),
-      config3: this.initNum(0, "万", {
+      config3: this.initNum(0, "", {
         fontSize: 20,
       }),
-      config4: this.initNum(0, "万", {
+      config4: this.initNum(0, "", {
         fontSize: 20,
       }),
-      config5: this.initNum(0, "万", {
+      config5: this.initNum(0, "", {
         fontSize: 40,
       }),
       config6: this.initNum(0, "%", {
+        fontSize: 20,
+      }),
+      config7: this.initNum(0, "", {
+        fontSize: 20,
+      }),
+      config8: this.initNum(0, "", {
+        fontSize: 20,
+      }),
+      config9: this.initNum(0, "", {
+        fontSize: 20,
+      }),
+      config10: this.initNum(0, "", {
         fontSize: 20,
       }),
       inputShow: false,
@@ -345,12 +358,14 @@ export default {
       active: 0,
       cActive: 0,
       myChart: null,
+      regionData:[]
     };
   },
   computed: {
     options() {
       switch (this.active) {
         case 0:
+          // this.regionData = chartData.
           return PublicData.level;
         case 1:
           return PublicData.region;
@@ -362,10 +377,12 @@ export default {
     },
   },
   mounted() {
+    this.regionData = chartData.region
     setTimeout(() => {
       this.initEcharts();
       this.initConfig();
     }, 2000);
+  
   },
   methods: {
     numShowClick() {
@@ -378,29 +395,46 @@ export default {
       }, 2000);
     },
     initConfig() {
-      this.config = this.initNum(123456, "个", {
+      this.config = this.initNum(29916192, "个", {
         fontSize: 40,
       });
 
-      this.config1 = this.initNum(123456, "万", {
+      this.config1 = this.initNum(3357942, "", {
         fontSize: 20,
       });
 
-      this.config2 = this.initNum(123456, "万", {
+      this.config2 = this.initNum(3178231, "", {
         fontSize: 20,
       });
 
-      this.config3 = this.initNum(123456, "万", {
+      this.config3 = this.initNum(17695298, "", {
         fontSize: 20,
       });
 
-      this.config4 = this.initNum(123456, "万", {
+      this.config4 = this.initNum(5684721, "", {
         fontSize: 20,
       });
 
-      this.config5 = this.initNum(123456, "万", {
+      this.config5 = this.initNum(9123938, "", {
         fontSize: 40,
       });
+
+      this.config7 = this.initNum(1284242, "", {
+        fontSize: 20,
+      });
+
+      this.config8 = this.initNum(1789233, "", {
+        fontSize: 20,
+      });
+
+      this.config9 = this.initNum(4812344, "", {
+        fontSize: 20,
+      });
+
+      this.config10 = this.initNum(1238119, "", {
+        fontSize: 20,
+      });
+
 
       this.config6 = {
         number: [0.48],
@@ -416,26 +450,41 @@ export default {
         fontSize: 40,
       });
 
-      this.config1 = this.initNum(0, "万", {
+      this.config1 = this.initNum(0, "", {
         fontSize: 20,
       });
 
-      this.config2 = this.initNum(0, "万", {
+      this.config2 = this.initNum(0, "", {
         fontSize: 20,
       });
 
-      this.config3 = this.initNum(0, "万", {
+      this.config3 = this.initNum(0, "", {
         fontSize: 20,
       });
 
-      this.config4 = this.initNum(0, "万", {
+      this.config4 = this.initNum(0, "", {
         fontSize: 20,
       });
 
-      this.config5 = this.initNum(0, "万", {
+      this.config5 = this.initNum(0, "", {
         fontSize: 40,
       });
 
+      this.config7 = this.initNum(0, "", {
+        fontSize: 20,
+      });
+
+      this.config8 = this.initNum(0, "", {
+        fontSize: 20,
+      });
+
+      this.config9 = this.initNum(0, "", {
+        fontSize: 20,
+      });
+
+      this.config10 = this.initNum(0, "", {
+        fontSize: 20,
+      });
       this.config6 = {
         number: [0],
         toFixed: 2,
@@ -462,6 +511,9 @@ export default {
     },
     changeEcharts() {
       this.flag = !this.flag;
+      this.resetChart()
+    },
+    resetChart() {
       this.myChart.clear();
       if (this.flag) {
         this.echartsPie();
@@ -478,8 +530,8 @@ export default {
       this.myChart = echarts.init(document.getElementById("main"));
       option = {
         title: {
-          text: "某站点用户访问来源",
-          subtext: "纯属虚构",
+          text: "",
+          subtext: "",
           left: "center",
           show: false,
         },
@@ -493,15 +545,15 @@ export default {
         },
         series: [
           {
-            name: "访问来源",
+            name: "",
             type: "pie",
             radius: "50%",
-            data: chartData.region,
+            data: this.regionData,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
+                shadowColor: "rgba(0, 0, 0, 0.8)",
               },
             },
           },
@@ -514,11 +566,10 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       this.myChart = echarts.init(document.getElementById("main"));
 
-      var category = chartData.region;
       // 类别
-      var total = 10000; // 数据总数
+      var total = 1000; // 数据总数
       var datas = [];
-      category.forEach((value) => {
+      this.regionData.forEach((value) => {
         datas.push(value.value);
       });
       var option = {
@@ -555,7 +606,7 @@ export default {
           {
             type: "category",
             inverse: false,
-            data: category,
+            data: this.regionData,
             axisLine: {
               show: false,
             },
@@ -667,7 +718,7 @@ export default {
                 },
               },
             },
-            data: category,
+            data: this.regionData,
             z: 1,
             animationEasing: "elasticOut",
           },
@@ -687,7 +738,7 @@ export default {
             symbolPosition: "start",
             symbolOffset: [1, -1],
             symbolBoundingData: this.total,
-            data: category,
+            data: this.regionData,
             z: 2,
             animationEasing: "elasticOut",
           },
@@ -797,15 +848,59 @@ export default {
     },
     cItemClick(index) {
       this.cActive = index;
+      let data = []
+
+      switch (this.cActive) {
+        case 0:
+          this.regionData = chartData.region
+          break;
+        case 1:
+          chartData.region.forEach(item =>{
+            data.push({
+              ...item,
+              value: item.sheng
+            })
+          })
+          this.regionData = data
+          break
+        case 2:
+          chartData.region.forEach(item =>{
+            data.push({
+              ...item,
+              value: item.shi
+            })
+          })
+          this.regionData = data
+          break
+        case 3:
+          chartData.region.forEach(item =>{
+            data.push({
+              ...item,
+              value: item.xian
+            })
+          })
+          this.regionData = data
+          break
+        case 4:
+          chartData.region.forEach(item =>{
+            data.push({
+              ...item,
+              value: item.xiang
+            })
+          })
+          this.regionData = data
+          break
+        default:
+          this.regionData = chartData.region
+          break;
+      }
+      this.resetChart()
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-  .across {
-    // height: ;
-  }
 
 .container-hide {
   transition: width 2s ease-out, opacity 1s ease-in, visibility 1s ease-in;
@@ -867,9 +962,9 @@ export default {
       margin: 5px 0;
       margin-right: 10px;
       cursor: pointer;
-      color: #67c23a;
+      color: #409eff;
       background: #ecf5ff;
-      border: 1px solid #67c23a;
+      border: 1px solid #409eff;
     }
     .c-item_t {
       flex: 30%;
@@ -877,8 +972,8 @@ export default {
     }
     .active {
       color: #fff;
-      border: 1px solid #67c23a;
-      background: #67c23a;
+      border: 1px solid #409eff;
+      background: #409eff;
     }
   }
 }
@@ -920,11 +1015,11 @@ export default {
   margin-top: 14px;
   padding: 3px 20px;
   // border-radius: 50px;
-  background: rgba(9, 47, 93, 0.5);
+  background: rgba(9, 47, 93, 0.8);
 }
 #main {
   margin-top: 20px;
-  background: rgba(9, 47, 93, 0.5);
+  background: rgba(9, 47, 93, 0.8);
   border-radius: 20px;
 }
 .echarts {

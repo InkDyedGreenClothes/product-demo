@@ -58,7 +58,7 @@ export default {
     init() {
       this.map = new BMapGL.Map("map");
       this.map.centerAndZoom(
-        new BMapGL.Point(120.15950176230716, 30.275062360607585),
+        new BMapGL.Point(120.15950897773592, 30.272457406664483),
         19
       ); // 初始化地图,设置中心点坐标和地图级别
       this.map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放

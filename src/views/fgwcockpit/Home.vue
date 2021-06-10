@@ -97,7 +97,7 @@ export default {
         case 2:
           this.$refs.Across.centerShow = false;
           setTimeout(() => {
-            this.$refs.map.start();
+            // this.$refs.map.start();
           }, 5000);
           break;
 
@@ -107,7 +107,7 @@ export default {
     },
     // 详情显示
     handleDetail() {
-      this.detailShow = true;
+      this.$refs.Across.detailShow = true;
       // this.centerShow = false;
     },
   },
