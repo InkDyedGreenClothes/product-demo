@@ -20,32 +20,44 @@ export default {
   mounted() {
     var path = [
       {
-        lng: 116.297611,
-        lat: 40.047363,
+        lng: 120.160156,
+        lat: 30.271396,
       },
       {
-        lng: 116.302839,
-        lat: 40.048219,
+        lng: 120.1629934,
+        lat: 30.272071,
       },
       {
-        lng: 116.308301,
-        lat: 40.050566,
+        lng: 120.161543,
+        lat: 30.276487,
       },
       {
-        lng: 116.305732,
-        lat: 40.054957,
+        lng: 120.15973809,
+        lat: 30.27536524,
       },
       {
-        lng: 116.304754,
-        lat: 40.057953,
+        lng: 120.154021,
+        lat: 30.273328,
       },
       {
-        lng: 116.306487,
-        lat: 40.058312,
+        lng: 120.154656,
+        lat: 30.271671,
       },
       {
-        lng: 116.307223,
-        lat: 40.056379,
+        lng: 120.157359,
+        lat: 30.269708,
+      },
+      {
+        lng: 120.158396,
+        lat: 30.270601,
+      },
+      {
+        lng: 120.159415,
+        lat: 30.268479,
+      },
+      {
+        lng: 120.158695,
+        lat: 30.268123,
       },
     ];
     this.point = [];
@@ -59,7 +71,7 @@ export default {
       this.map = new BMapGL.Map("map");
       this.map.centerAndZoom(
         new BMapGL.Point(120.15950897773592, 30.272457406664483),
-        19
+        15
       ); // 初始化地图,设置中心点坐标和地图级别
       this.map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
       this.map.setMapStyleV2({ styleJson: styleJson }); // 设置地图样式

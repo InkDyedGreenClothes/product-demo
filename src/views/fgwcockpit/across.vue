@@ -1071,6 +1071,22 @@ export default {
 /deep/.el-form-item {
   margin-bottom: 0;
 }
+
+
+/deep/.el-table th {
+  background: rgba(9, 47, 93, 0.8);
+  color: #fff;
+}
+/deep/.el-table tr {
+  cursor: pointer;
+  background: rgba(9, 47, 93, 0.8);
+  color: #fff;
+}
+
+/deep/.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: rgba(9, 47, 93, 0.8) !important;
+}
+
 .left-content_container::-webkit-scrollbar {
   width: 5px;
 }

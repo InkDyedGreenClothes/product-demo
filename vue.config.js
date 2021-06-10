@@ -7,7 +7,7 @@ module.exports = {
   publicPath: './',
   assetsDir: 'static',
   //  process.env.VUE_APP_PROJECT_NAME
-  outputDir: './dist',
+  outputDir: './product-demo',
   lintOnSave: false,
   productionSourceMap: false,
   devServer: {

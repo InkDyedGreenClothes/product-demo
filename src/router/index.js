@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/fgwcockpit/Home.vue'
+import Fgwcockpit from '../views/fgwcockpit/index'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Fgwcockpit',
+    component: Fgwcockpit
   },
   {
     path: '/about',

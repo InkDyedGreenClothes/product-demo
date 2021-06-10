@@ -1,11 +1,12 @@
 <template>
   <div class="scheduling">
     <!-- 左侧 -->
+    <!-- 
+        'container-hide': !centerShow,
+        'container-show': centerShow, -->
     <div
       :class="{
         'left-container': true,
-        'container-hide': !centerShow,
-        'container-show': centerShow,
       }"
     >
       <div class="left-top">
@@ -34,6 +35,7 @@
             style="width: 96%; margin: 20px auto 0 auto"
             max-height="260px"
             border
+            @row-click="rowClick(false, '申请单详情')"
           >
             <el-table-column
               prop="name"
@@ -86,6 +88,7 @@
             style="width: 96%; margin: 20px auto 0 auto"
             max-height="260px"
             border
+            @row-click="rowClick1(true, '调拨单详情')"
           >
             <el-table-column
               prop="name"
@@ -125,17 +128,134 @@
       <div class="right-top">
         <dv-border-box-10>
           <div class="title">
-            <h3>全省应急物资储备年度支出</h3>
-            <div style="margin: 10px 20px 0 30px">
-              
-            </div>
+            <h3>{{ rightTitle }}</h3>
+            <div style="margin: 10px 20px 0 30px"></div>
           </div>
           <!-- 内容 -->
           <div class="content-container">
+            <el-steps
+              direction="vertical"
+              :active="0"
+              style="margin-left: 230px"
+            >
+              <el-step title="步骤 1">
+                <template slot="icon">
+                  <span class="unActive">5</span>
+                </template>
+                <template slot="title">
+                  <span class="steps-title">2021-06-05 22:02:00</span>
+                </template>
+                <template slot="description">
+                  <h3 style="margin-top: 0; margin-left: 20px">物资入库</h3>
+                  <h3 style="margin-left: 20px">操作人：邵琦</h3>
+                </template>
+              </el-step>
 
+              <el-step title="步骤 1">
+                <template slot="icon">
+                  <span class="unActive">4</span>
+                </template>
+                <template slot="title">
+                  <span class="steps-title">2021-06-05 23:55:06</span>
+                </template>
+                <template slot="description">
+                  <h3 style="margin-top: 0; margin-left: 20px">物资发车</h3>
+                  <h3 style="margin-left: 20px">操作人：米彩色</h3>
+                </template>
+              </el-step>
+              <el-step title="步骤 1">
+                <template slot="icon">
+                  <span class="unActive">3</span>
+                </template>
+                <template slot="title">
+                  <span class="steps-title">2021-06-05 23:20:50</span>
+                </template>
+                <template slot="description">
+                  <h3 style="margin-top: 0; margin-left: 20px">物资装车</h3>
+                  <h3 style="margin-left: 20px">操作人：程世勇</h3>
+                </template>
+              </el-step>
+
+              <el-step title="步骤 1">
+                <template slot="icon">
+                  <span class="unActive">3</span>
+                </template>
+                <template slot="title">
+                  <span class="steps-title">2021-06-05 22:30:50</span>
+                </template>
+                <template slot="description">
+                  <h3 style="margin-top: 0; margin-left: 20px">仓库货物准备</h3>
+                  <h3 style="margin-left: 20px">操作人：陈克</h3>
+                </template>
+              </el-step>
+
+              <el-step title="步骤 1">
+                <template slot="icon">
+                  <span class="unActive">2</span>
+                </template>
+                <template slot="title">
+                  <span class="steps-title">2021-06-05 22:20:03</span>
+                </template>
+                <template slot="description">
+                  <h3 style="margin-top: 0; margin-left: 20px">调度审批</h3>
+                  <h3 style="margin-left: 20px">操作人：钱立遥</h3>
+                </template>
+              </el-step>
+
+              <el-step title="步骤 1">
+                <template slot="icon">
+                  <span class="unActive">1</span>
+                </template>
+                <template slot="title">
+                  <span class="steps-title">2021-06-05 22:02:00</span>
+                </template>
+                <template slot="description">
+                  <h3 style="margin-top: 0; margin-left: 20px">申请调度</h3>
+                  <h3 style="margin-left: 20px">操作人：王鹏飞</h3>
+                </template>
+              </el-step>
+            </el-steps>
           </div>
         </dv-border-box-10>
       </div>
+    </div>
+
+    <div
+      :class="{
+        'right-container1': true,
+        'container-hide': !centerShow1,
+        'container-show1': centerShow1,
+      }"
+    >
+      <dv-border-box-10>
+        <div class="title">
+          <h3>{{ rightTitle }}</h3>
+          <div style="margin: 10px 20px 0 30px"></div>
+        </div>
+        <!-- 内容 -->
+        <div class="content-container">
+          <div class="text-item">
+            <div class="title">申请编号</div>
+            <div>CD20210504000009</div>
+          </div>
+          <div class="text-item">
+            <div class="title">物资信息</div>
+            <div>棉被   100 </div>
+          </div>
+          <div class="text-item">
+            <div class="title">车辆信息</div>
+            <div>等待物流系统接入</div>
+          </div>
+          <div class="text-item">
+            <div class="title">运输人员</div>
+            <div>等待物流系统接入</div>
+          </div>
+          <div class="text-item">
+            <div class="title">预计抵达时间</div>
+            <div>等待物流系统接入</div>
+          </div>
+        </div>
+      </dv-border-box-10>
     </div>
   </div>
 </template>
@@ -145,7 +265,10 @@ export default {
   name: "scheduling",
   data() {
     return {
-      centerShow: true,
+      centerShow1: false,
+      transfersShow: true,
+      rightTitle: "申请单详情",
+      centerShow: false,
       singleInd: 0,
       singleInd1: 0,
       tableData: [
@@ -173,6 +296,19 @@ export default {
     };
   },
   methods: {
+    rowClick(flag, title) {
+      this.centerShow = false;
+      this.centerShow1 = true;
+      this.transfersShow = flag;
+      this.rightTitle = title;
+    },
+    rowClick1(flag, title) {
+      this.centerShow1 = false;
+      this.centerShow = true;
+      this.transfersShow = flag;
+      this.rightTitle = title;
+      this.$emit("start");
+    },
     handleSingle(index) {
       this.singleInd = index;
     },
@@ -184,13 +320,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .scheduling {
-//   position: absolute;
-//   left: 10px;
-//   top: 120px;
-//   height: 70%;
+.container-hide {
+  transition: width 2s ease-out, opacity 1s ease-in, visibility 1s ease-in;
+  width: 0;
+  visibility: 0;
+  opacity: 0;
+}
+.container-show {
+  // 这是滑入状态
+  transition: width 1s ease-out, opacity 2s ease-in, visibility 2s ease-in;
+  opacity: 1;
+  visibility: 1;
+  width: 25%;
+}
+/deep/.el-step__title.is-process {
+  color: #fff;
+}
+/deep/.el-step__description.is-process {
+  color: #fff;
+}
 
-// }
+.steps-title {
+  position: absolute;
+  left: -182px;
+  display: block;
+  width: 170px;
+}
 
 .title {
   height: 40px;
@@ -240,6 +395,8 @@ export default {
   top: 120px;
   height: 70%;
   z-index: 999;
+  width: 25%;
+
   .left-top {
     height: 50%;
   }
@@ -286,7 +443,14 @@ export default {
   transition: width 1s ease-out, opacity 2s ease-in, visibility 2s ease-in;
   opacity: 1;
   visibility: 1;
-  width: 35%;
+  width: 28%;
+}
+.container-show1 {
+  // 这是滑入状态
+  transition: width 1s ease-out, opacity 2s ease-in, visibility 2s ease-in;
+  opacity: 1;
+  visibility: 1;
+  width: 25%;
 }
 
 // 右侧
@@ -300,9 +464,49 @@ export default {
     height: 100%;
     width: 100%;
   }
-  .right-bottom {
-    margin-top: 20px;
-    height: 55%;
+  .right-top1 {
+    height: 100%;
+    width: 100%;
+  }
+}
+.right-container1 {
+  position: absolute;
+  right: 10px;
+  top: 120px;
+  height: 32%;
+  z-index: 99;
+
+  .content-container {
+    height: 80%;
+    color: #bde0ff;
+    margin: 0;
+    margin-top: 14px;
+    padding: 3px 20px;
+    // border-radius: 50px;
+    background: rgba(9, 47, 93, 0.8);
+    .text-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      div {
+        flex: 2;
+        text-align: center;
+        padding: 8px 20px;
+      }
+      .title {
+        flex: 1;
+        color: #51ffff;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+  }
+  .right-top {
+    height: 80%;
+    width: 100%;
+  }
+  .right-top1 {
+    height: 100%;
     width: 100%;
   }
 }

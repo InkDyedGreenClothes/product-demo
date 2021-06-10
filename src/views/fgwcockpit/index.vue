@@ -3,13 +3,23 @@
     <dv-full-screen-container>
       <!-- <dv-loading v-if="loading">Loading...</dv-loading> -->
       <!-- 头部 -->
-      <dv-decoration-5 class="top-bg"></dv-decoration-5>
-      <div class="top-title">浙江省应急物资保障系统</div>
+      <!-- <dv-decoration-5 class="top-bg"></dv-decoration-5> -->
+      <div class="top-title">
+        <span class="time">{{ nowTime }}</span>
+        浙江省应急物资保障系统
+        <div class="cccc">
+          <dv-decoration-1 style="width: 200px; height: 30px" />
+        </div>
+      </div>
       <Map ref="map" @handleMarker="handleDetail"></Map>
       <!-- 统览视图 -->
-      <Across ref="Across" v-if="activeInd == 1"></Across>
+      <Across ref="Across" v-show="activeInd == 1"></Across>
       <!-- 调度视图 -->
-      <Scheduling ref="Scheduling" v-if="activeInd == 2"></Scheduling>
+      <Scheduling
+        ref="Scheduling"
+        v-show="activeInd == 2"
+        @start="start"
+      ></Scheduling>
 
       <!-- 底部切换 -->
       <div class="bottom-tab">
@@ -42,7 +52,8 @@ export default {
   },
   data() {
     return {
-      activeInd: 2,
+      nowTime: "",
+      activeInd: 1,
       flag: false,
       lnglat: [
         {
@@ -65,15 +76,21 @@ export default {
     };
   },
   mounted() {
-    Util.currentTime();
+    setInterval(() => {
+      let { Y, M, D, h, m, s } = Util.currentTime();
+      this.nowTime = `${Y}-${M}-${D} ${h}:${m}:${s}`;
+    }, 1000);
     setTimeout(() => {
       this.lnglat.forEach((item) => {
         let lngLat = item.lnglat;
         this.$refs.map.addMarker(lngLat[0], lngLat[1], "red");
       });
-    }, 2000);
+    }, 3000);
   },
   methods: {
+    start() {
+      this.$refs.map.start();
+    },
     // 切换底部tab
     buttomTab(index) {
       this.activeInd = index;
@@ -84,21 +101,20 @@ export default {
       switch (index) {
         case 0:
           this.$refs.Across.centerShow = false;
-
           break;
         case 1:
           this.$refs.Across.centerShow = true;
-          this.lnglat.forEach((item) => {
-            let lngLat = item.lnglat;
-            this.$refs.map.addMarker(lngLat[0], lngLat[1], "red");
-          });
+
+          setTimeout(() => {
+            this.lnglat.forEach((item) => {
+              let lngLat = item.lnglat;
+              this.$refs.map.addMarker(lngLat[0], lngLat[1], "red");
+            });
+          }, 3000);
           break;
 
         case 2:
           this.$refs.Across.centerShow = false;
-          setTimeout(() => {
-            // this.$refs.map.start();
-          }, 5000);
           break;
 
         default:
@@ -128,15 +144,34 @@ export default {
   z-index: 99;
 }
 .top-title {
+  width: 100%;
+  height: 100px;
+  text-align: center;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 100;
-  font-size: 20px;
+  font-size: 30px;
   color: #fff;
   font-weight: 600;
-  line-height: 50px;
+  line-height: 90px;
+  background: url("../../assets/topbg.png") no-repeat;
+  background-size: cover;
+  .time {
+    font-size: 14px;
+    color: #bde0ff;
+    font-weight: 400;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    line-height: 50px;
+  }
+  .cccc {
+    position: absolute;
+    top: 5px;
+    right: 30px;
+  }
 }
 
 // 底部tab
