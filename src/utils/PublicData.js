@@ -104,7 +104,31 @@ const publicData = {
       label: "社会安全事件",
       value: "6",
     },
-  ]
-}
+  ],
+  department: [
+    {
+      label: "全部",
+      value: "ALL",
+    },
+    { value: 0, label: "经信厅" },
+    { value: 1, label: " 生态环境厅" },
+    { value: 3, label: " 建设厅" },
+    { value: 4, label: " 交通运输厅" },
+    { value: 5, label: " 水利厅" },
+    { value: 6, label: " 农业农村厅" },
+    { value: 7, label: " 商务厅" },
+    { value: 8, label: " 应急管理厅" },
+    { value: 9, label: " 粮食物资局" },
+    { value: 10, label: " 供销社" },
+    { value: 11, label: " 卫生健康委" },
+    { value: 12, label: " 药监局" },
+    { value: 13, label: " 消防救援总队" },
+    { value: 14, label: " 红十字会" },
+    { value: 15, label: " 省属企业" },
+    { value: 16, label: " 自然资源厅" },
+    { value: 17, label: " 林业局" },
+    { value: 18, label: " 地震局" },
+  ],
+};
 
-export default publicData
+export default publicData;

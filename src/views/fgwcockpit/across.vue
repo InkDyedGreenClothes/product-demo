@@ -60,12 +60,18 @@
             >
               事件
             </div>
+            <div
+              :class="{ 'tab-item': true, active: active == 3 }"
+              @click="itemClick(3)"
+            >
+              部门
+            </div>
           </div>
           <div class="left-content_container">
             <div
               :class="{
                 'c-item': true,
-                'c-item_t': active == 2,
+                'c-item_t': active == 2 || active == 3,
                 active: cActive == index,
               }"
               v-for="(item, index) in options"
@@ -80,11 +86,14 @@
       <div class="left-bottom">
         <dv-border-box-10>
           <div class="title">
-            <h3>重点物资库存数据</h3>
+            <h3>重点物资库存数据({{ chartBtnName }})</h3>
             <div style="margin: 10px 20px 0 30px">
-              <el-button type="primary" @click="changeEcharts"
-                >主要按钮</el-button
-              >
+              <el-button
+                type="primary"
+                @click="changeEcharts"
+                icon="el-icon-s-operation"
+                circle
+              ></el-button>
             </div>
           </div>
           <div id="main" class="echarts"></div>
@@ -268,6 +277,7 @@ export default {
   name: "across",
   data() {
     return {
+      chartBtnName: "按地区统计",
       tableData: [
         {
           name: "手电筒",
@@ -305,7 +315,7 @@ export default {
       loading: true,
       numShow: true,
       configData: {
-        header: ['物资所属单位', '类型', '时间'],
+        header: ["物资所属单位", "类型", "时间"],
         data: [
           ["省商业厅", "入库", "18:27:17"],
           ["省国资委", "出库", "18:22:05"],
@@ -358,7 +368,7 @@ export default {
       active: 0,
       cActive: 0,
       myChart: null,
-      regionData:[]
+      regionData: [],
     };
   },
   computed: {
@@ -371,18 +381,19 @@ export default {
           return PublicData.region;
         case 2:
           return PublicData.event;
+        case 3:
+          return PublicData.department;
         default:
           return PublicData.level;
       }
     },
   },
   mounted() {
-    this.regionData = chartData.region
+    this.regionData = chartData.region;
     setTimeout(() => {
       this.initEcharts();
       this.initConfig();
     }, 2000);
-  
   },
   methods: {
     numShowClick() {
@@ -434,7 +445,6 @@ export default {
       this.config10 = this.initNum(1238119, "", {
         fontSize: 20,
       });
-
 
       this.config6 = {
         number: [0.48],
@@ -511,7 +521,7 @@ export default {
     },
     changeEcharts() {
       this.flag = !this.flag;
-      this.resetChart()
+      this.resetChart();
     },
     resetChart() {
       this.myChart.clear();
@@ -848,60 +858,59 @@ export default {
     },
     cItemClick(index) {
       this.cActive = index;
-      let data = []
+      let data = [];
 
       switch (this.cActive) {
         case 0:
-          this.regionData = chartData.region
+          this.regionData = chartData.region;
           break;
         case 1:
-          chartData.region.forEach(item =>{
+          chartData.region.forEach((item) => {
             data.push({
               ...item,
-              value: item.sheng
-            })
-          })
-          this.regionData = data
-          break
+              value: item.sheng,
+            });
+          });
+          this.regionData = data;
+          break;
         case 2:
-          chartData.region.forEach(item =>{
+          chartData.region.forEach((item) => {
             data.push({
               ...item,
-              value: item.shi
-            })
-          })
-          this.regionData = data
-          break
+              value: item.shi,
+            });
+          });
+          this.regionData = data;
+          break;
         case 3:
-          chartData.region.forEach(item =>{
+          chartData.region.forEach((item) => {
             data.push({
               ...item,
-              value: item.xian
-            })
-          })
-          this.regionData = data
-          break
+              value: item.xian,
+            });
+          });
+          this.regionData = data;
+          break;
         case 4:
-          chartData.region.forEach(item =>{
+          chartData.region.forEach((item) => {
             data.push({
               ...item,
-              value: item.xiang
-            })
-          })
-          this.regionData = data
-          break
+              value: item.xiang,
+            });
+          });
+          this.regionData = data;
+          break;
         default:
-          this.regionData = chartData.region
+          this.regionData = chartData.region;
           break;
       }
-      this.resetChart()
+      this.resetChart();
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .container-hide {
   transition: width 2s ease-out, opacity 1s ease-in, visibility 1s ease-in;
   width: 0;
@@ -1071,7 +1080,6 @@ export default {
 /deep/.el-form-item {
   margin-bottom: 0;
 }
-
 
 /deep/.el-table th {
   background: rgba(9, 47, 93, 0.8);
