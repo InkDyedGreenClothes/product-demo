@@ -11,10 +11,10 @@ export default {
       point: [],
       trackAni: null,
       iconImage: {
-        red: require('./image/red.png'),
-        green: require('./image/green.png'),
-        orange: require('./image/orange.png'),
-      }
+        red: require("./image/red.png"),
+        green: require("./image/green.png"),
+        orange: require("./image/orange.png"),
+      },
     };
   },
   mounted() {
@@ -70,8 +70,8 @@ export default {
     init() {
       this.map = new BMapGL.Map("map");
       this.map.centerAndZoom(
-        new BMapGL.Point(120.15950897773592, 30.272457406664483),
-        15
+        new BMapGL.Point(120.10373122597868,29.330442120240864),
+        9
       ); // 初始化地图,设置中心点坐标和地图级别
       this.map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
       this.map.setMapStyleV2({ styleJson: styleJson }); // 设置地图样式
@@ -96,7 +96,7 @@ export default {
       // 创建Marker标注，使用小车图标
       var pt = new BMapGL.Point(lng, lat);
       var marker = new BMapGL.Marker(pt, {
-        icon: myIcon
+        icon: myIcon,
       });
 
       var infoWindow = new BMapGL.InfoWindow(
@@ -105,12 +105,23 @@ export default {
       );
       marker.addEventListener("click", function () {
         // this.map.openInfoWindow(infoWindow, pt); // 开启信息窗口
-        that.$emit('handleMarker')
+        that.$emit("handleMarker");
       });
       // 将标注添加到地图
       this.map.addOverlay(marker);
     },
     customIcon() {},
+    DrivingRoute() {
+      let that = this
+      var p1 = new BMapGL.Point(119.647277,29.079056);
+      var p2 = new BMapGL.Point(121.420737,28.655768);
+
+      var driving = new BMapGL.DrivingRoute(that.map, {
+        renderOptions: { map: that.map, autoViewport: true },
+      });
+      driving.search(p1, p2);
+      this.setCenter(119.647277,29.079056,10);
+    },
     start() {
       var pl = new BMapGL.Polyline(this.point, {
         strokeColor: "red",
@@ -133,8 +144,8 @@ export default {
       this.trackAni.continue();
     },
     clearOverlays() {
-      this.map.clearOverlays()
-    }
+      this.map.clearOverlays();
+    },
   },
 };
 </script>

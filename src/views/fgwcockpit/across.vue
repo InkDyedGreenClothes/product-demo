@@ -521,6 +521,11 @@ export default {
     },
     changeEcharts() {
       this.flag = !this.flag;
+      if(this.flag) {
+        this.chartBtnName = '按物资类型统计'
+      } else {
+        this.chartBtnName = '按地区统计'
+      }
       this.resetChart();
     },
     resetChart() {

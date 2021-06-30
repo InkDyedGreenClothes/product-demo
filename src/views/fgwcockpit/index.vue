@@ -89,7 +89,8 @@ export default {
   },
   methods: {
     start() {
-      this.$refs.map.start();
+      // this.$refs.map.start();
+      this.$refs.map.DrivingRoute()
     },
     // 切换底部tab
     buttomTab(index) {
